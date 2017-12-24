@@ -1,0 +1,38 @@
+{
+  "name": "key-vault-node-deploy-certificates-to-vm",
+  "author": "Microsoft Corporation",
+  "contributors": [
+    "Xu, Willie <wilx@microsoft.com>"
+  ],
+  "version": "0.1.0",
+  "description": "A sample to demonstrate creating a vm with certificates from a keyvault in Azure using node sdk.",
+  "tags": [
+    "azure",
+    "sdk"
+  ],
+  "keywords": [
+    "node",
+    "azure"
+  ],
+  "main": "./index.js",
+  "license": "MIT",
+  "dependencies": {
+    "async": "0.2.7",
+    "azure-arm-compute": "^4.0.0",
+    "azure-arm-keyvault": "^1.1.0-preview",
+    "azure-arm-network": "^5.1.0",
+    "azure-arm-resource": "^3.0.0-preview",
+    "azure-arm-storage": "^3.2.0",
+    "azure-graph": "^2.2.0",
+    "azure-keyvault": "git://github.com/williexu/testkv.git",
+    "ms-rest-azure": "git://github.com/williexu/testkv.git#ms-rest-azure"
+  },
+  "homepage": "key-vault-node-deploy-certificates-to-vm",
+  "repository": {
+    "type": "git",
+    "url": "key-vault-node-deploy-certificates-to-vm"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
