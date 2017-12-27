@@ -191,9 +191,13 @@ function startSample() {
   }).then((ipAddress) => {
     console.log(`You can connect to the VM using: ssh ${adminUsername}@${ipAddress.ipAddress}`);
     console.log(`And password: ${adminPassword}\n`);
-    console.log("Your certificate is available in this folder: /var/lib/waagent")
-    console.log("You must be root to see it (sudo su)\n")
-    console.log(`/nYou might want to delete the resource group: ${resourceGroupName}`)
+    console.log("Your certificate is available in this folder: /var/lib/waagent");
+    console.log("You must be root to see it (sudo su)\n");
+    console.log(`/nDeleting the resource group: ${resourceGroupName}`);
+    // Comment the line below to retain your sample resources
+    return resourceClient.resourceGroups.deleteMethod(resourceGroupName);
+  }).then((result) => {
+    console.log(`/nDeleted the resource group: ${resourceGroupName}`);
   }).catch((err) => {
     throw (err);
   });

@@ -215,7 +215,7 @@ During the creation of the VM, use the `secrets` atribute to assign your certifi
 
   return computeClient.virtualMachines.createOrUpdate(resourceGroupName, vmName, vmParameters);
 ```
-
+> [AZURE.NOTE] By default, this sample deletes the resources created in the sample. To retain them, comment out the line: `return resourceClient.resourceGroups.deleteMethod(resourceGroupName);`
 
 ## Resources
 
