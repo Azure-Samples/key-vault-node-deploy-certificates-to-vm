@@ -46,12 +46,13 @@ or [the portal](https://azure.microsoft.com/documentation/articles/resource-grou
     export AZURE_SUBSCRIPTION_ID={your subscription id}
     ```
 
-    Optional, but recommended; you can access the object_id through portal by navigating to your service principal.
-    ![Object ID through Portal screenshot](portal_obj_id.JPG)
-    This sample will attempt to obtain through graph if not provided:
+    Optional, but recommended; this sample will attempt to obtain through graph if not provided:
     ```
     export AZURE_OBJECT_ID={your object id},
     ```
+    you can access the object_id through portal by navigating to your service principal.
+    ![Object ID through Portal screenshot](portal_obj_id.JPG)
+
     > [AZURE.NOTE] On Windows, use `set` instead of `export`.
 
 1. Run the sample.
@@ -112,7 +113,7 @@ You can also found different example on how to create a Key Vault account:
 > In order to execute this sample, your Key Vault account MUST have the "enabled-for-deployment" special permission.
   The EnabledForDeployment flag explicitly gives Azure (Microsoft.Compute resource provider) permission to use the certificates stored as secrets for this deployment. 
 
-> Note that access policy takes an *object_id*, not a client_id as parameter. This sample provides a quick way to convert a Service Principal client_id to an object_id using the `azure-graphrbac` client, provided the service principal used has the permission to view information on Microsoft Graph; this can be done by navigating to the service-principal => Settings => Required Permissions => Add (Microsoft Graph). Alternatively, simply set the `AZURE_OBJECT_ID` environment variable (see above).
+> Note that access policy takes an *object_id*, not a client_id as parameter. This sample provides a quick way to convert a Service Principal client_id to an object_id using the `azure-graphrbac` client, provided the service principal used has the permission to view information on Microsoft Graph; this can be done by navigating to the service-principal => Settings => Required Permissions => Add (Microsoft Graph). Alternatively, simply set the `AZURE_OBJECT_ID` environment variable ([see above](https://github.com/Azure-Samples/key-vault-node-deploy-certificates-to-vm#installation)).
 
 
 ### Ask Key Vault to create a certificate for you
