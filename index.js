@@ -19,7 +19,7 @@ _validateEnvironmentVariables();
 let clientId = process.env['CLIENT_ID'];
 let domain = process.env['DOMAIN'];
 let secret = process.env['APPLICATION_SECRET'];
-let objectId = process.env['OBJECT_ID'];
+let objectId = process.env['AZURE_OBJECT_ID'];
 let subscriptionId = process.env['AZURE_SUBSCRIPTION_ID'];
 let resourceClient, computeClient, storageClient, networkClient, keyVaultManagementClient, keyVaultClient, graphClient;
 
