@@ -4,18 +4,14 @@
  * license information.
  */
 'use strict';
-const dotenv = require('dotenv');
-dotenv.config();
+
 const util = require('util');
 const msRestAzure = require('ms-rest-azure');
 const ComputeManagementClient = require('azure-arm-compute');
 const NetworkManagementClient = require('azure-arm-network');
 const ResourceManagementClient = require('azure-arm-resource').ResourceManagementClient;
 const KeyVaultManagementClient = require('azure-arm-keyvault');
-const { DefaultAzureCredential } = require("@azure/identity");
-const { SecretClient } = require("@azure/keyvault-secrets");
-const { CertificateClient } = require("@azure/keyvault-certificates");
-
+const KeyVault = require('azure-keyvault');
 const GraphRBACClient = require('azure-graph');
 const setTimeoutPromise = util.promisify(setTimeout);
 
@@ -51,14 +47,12 @@ let offer = 'UbuntuServer';
 let sku = '16.04.0-LTS';
 
 // Windows config
-// let publisher = 'microsoftwindowsserver';
-// let offer = 'windowsserver';
-// let sku = '2012-r2-datacenter';
+//let publisher = 'microsoftwindowsserver';
+//let offer = 'windowsserver';
+//let sku = '2012-r2-datacenter';
 
 let adminUsername = 'notadmin';
 let adminPassword = 'Pa$$w0rd92';
-
-const credential = new DefaultAzureCredential();
 
 ///////////////////////////////////////////
 //     Entrypoint for sample script      //
@@ -70,6 +64,7 @@ msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function (
   computeClient = new ComputeManagementClient(credentials, subscriptionId);
   networkClient = new NetworkManagementClient(credentials, subscriptionId);
   keyVaultManagementClient = new KeyVaultManagementClient(credentials, subscriptionId);
+  keyVaultClient = new KeyVault.KeyVaultClient(credentials);
   graphClient = new GraphRBACClient(credentials, domain);
 
   // If objectId not provided, try to get it using graph
@@ -142,42 +137,40 @@ function startSample() {
       secretProperties: {
         contentType: 'application/x-pkcs12'
       },
-      issuerName: 'Self',
+      issuerParameters: {
+        name: 'Self'
+      },
       x509CertificateProperties: {
         subject: 'CN=CLIGetDefaultPolicy',
         validity_in_months: 12,
         key_usage: [
-          "CrlSign",
-          "DataEncipherment",
-          "DigitalSignature",
-          "KeyEncipherment",
-          "KeyAgreement",
-          "KeyCertSign"
+          "cRLSign",
+          "dataEncipherment",
+          "digitalSignature",
+          "keyEncipherment",
+          "keyAgreement",
+          "keyCertSign"
         ]
       },
       lifetimeActions: [
         {
-          action: "AutoRenew",
-          daysBeforeExpiry: 90 
+          action: { actionType: "AutoRenew" },
+          trigger: { daysBeforeExpiry: 90 }
         }
       ]
     };
-
-    const certificateClient = new CertificateClient(vaultObj.properties.vaultUri, credential);
-    return certificateClient.beginCreateCertificate(certificateName, certificatePolicy);
+    return keyVaultClient.createCertificate(vaultObj.properties.vaultUri, certificateName, { certificatePolicy: certificatePolicy });
   }).then((certificate) => {
     // Poll until certificate operation finishes
     function pollStatus() {
       console.log("Wait until certificate creation is finished");
-      const certificateClient = new CertificateClient(vaultObj.properties.vaultUri, credential);
-      return setTimeoutPromise(5000, certificateClient.getCertificate(certificateName)).then((result) => {
+      return setTimeoutPromise(5000, keyVaultClient.getCertificateOperation(vaultObj.properties.vaultUri, certificateName)).then((result) => {
         if (result.status === "completed") {
           print_item(result);
 
           // Get certificate secret
           console.log('\n4.Get keyvault certificate as secret');
-          const secretClient = new SecretClient(vaultObj.properties.vaultUri, credential);
-          return secretClient.getSecret(certificateName);
+          return keyVaultClient.getSecret(vaultObj.properties.vaultUri, certificateName, '')
         }
         else {
           return pollStatus();
