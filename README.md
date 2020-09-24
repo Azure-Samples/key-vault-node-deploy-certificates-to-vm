@@ -15,12 +15,12 @@ This sample explains how you can create a VM in Nodejs, with certificates instal
 from a Key Vault account.
 
 ## This sample shows how to do the following operations of Key Vault certificate with Key Vault SDK
-- create resource group
-- create a key vault by the Key Vault Management Client
-- create the certificate
-- gets the creation operation associated with a specified certificate
-- get certificate as secret
-- delete resource group
+- Create resource group
+- Create a key vault by the Key Vault Management Client
+- Create the certificate
+- Gets the creation operation associated with a specified certificate
+- Get certificate as secret
+- Delete resource group
 
 ## Getting Started
 
@@ -236,38 +236,38 @@ The Key Vault certificates SDK here is **@azure/keyvault-certificates**, if you 
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault certificate tasks:
 
- * create the certificate
- * get the certificate from a specific version
- * update the certificate
- * update the policy of the certificate
- * delete the certificate
+     * Create the certificate
+     * Get the certificate from a specific version
+     * Update the certificate
+     * Update the policy of the certificate
+     * Delete the certificate
 
  * [operations.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/operations.ts) - Examples for Key Vault certificate's operation tasks:
 
- * create a new certificate
- * gets the creation operation associated with a specified certificate
- * deletes the creation operation for a specified certificate that is in the process of being created
- * get the certificate
+     * Create a new certificate
+     * Gets the creation operation associated with a specified certificate
+     * Deletes the creation operation for a specified certificate that is in the process of being created
+     * Get the certificate
 
  The Key Vault keys SDK here is **@azure/keyvault-keys**, if you are using the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-keys/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault key tasks:
 
- * create a new elliptic curve key in Azure Key Vault
- * create a new RSA key in Azure Key Vault
- * get a specified key
- * list the keys
- * update the key
- * delete the key
+     * Create a new elliptic curve key in Azure Key Vault
+     * Create a new RSA key in Azure Key Vault
+     * Get a specified key
+     * List the keys
+     * Update the key
+     * Delete the key
 
  The Key Vault keys SDK here is **@azure/keyvault-secrets**, if you are using the [latest](https://www.npmjs.com/package/@azure/keyvault-secrets) version of the key vault SDK package, please refer to the following examples:
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-secrets/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault secret tasks:
 
- * create a new secret
- * get the secret
- * update the secret with different attributes
- * delete the secret
+     * Create a new secret
+     * Get the secret
+     * Update the secret with different attributes
+     * Delete the secret
 
 ## Resources
 
