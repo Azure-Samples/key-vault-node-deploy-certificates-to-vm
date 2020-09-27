@@ -22,6 +22,45 @@ from a Key Vault account.
 - Get certificate as secret
 - Delete resource group
 
+## Use latest Key Vault SDK
+
+The Key Vault certificates SDK in the repo is **@azure/keyvault-certificates**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-certificates) version of the key vault SDK package, please refer to the following examples:
+
+ * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault certificate tasks:
+
+     * Create the certificate
+     * Get the certificate from a specific version
+     * Update the certificate
+     * Update the policy of the certificate
+     * Delete the certificate
+
+ * [operations.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/operations.ts) - Examples for Key Vault certificate's operation tasks:
+
+     * Create a new certificate
+     * Gets the creation operation associated with a specified certificate
+     * Deletes the creation operation for a specified certificate that is in the process of being created
+     * Get the certificate
+
+ The Key Vault keys SDK in the repo is **@azure/keyvault-keys**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
+
+ * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-keys/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault key tasks:
+
+     * Create a new elliptic curve key in Azure Key Vault
+     * Create a new RSA key in Azure Key Vault
+     * Get a specified key
+     * List the keys
+     * Update the key
+     * Delete the key
+
+ The Key Vault keys SDK in the repo is **@azure/keyvault-secrets**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-secrets) version of the key vault SDK package, please refer to the following examples:
+
+ * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-secrets/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault secret tasks:
+
+     * Create a new secret
+     * Get the secret
+     * Update the secret with different attributes
+     * Delete the secret
+
 ## Getting Started
 
 ### Prerequisites
@@ -229,45 +268,6 @@ During the creation of the VM, use the `secrets` atribute to assign your certifi
   return computeClient.virtualMachines.createOrUpdate(resourceGroupName, vmName, vmParameters);
 ```
 > [AZURE.NOTE] By default, this sample deletes the resources created in the sample. To retain them, comment out the line: `return resourceClient.resourceGroups.deleteMethod(resourceGroupName);`
-
-## Use latest Key Vault SDK
-
-The Key Vault certificates SDK here is **@azure/keyvault-certificates**, if you are using the [latest](https://www.npmjs.com/package/@azure/keyvault-certificates) version of the key vault SDK package, please refer to the following examples:
-
- * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault certificate tasks:
-
-     * Create the certificate
-     * Get the certificate from a specific version
-     * Update the certificate
-     * Update the policy of the certificate
-     * Delete the certificate
-
- * [operations.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/operations.ts) - Examples for Key Vault certificate's operation tasks:
-
-     * Create a new certificate
-     * Gets the creation operation associated with a specified certificate
-     * Deletes the creation operation for a specified certificate that is in the process of being created
-     * Get the certificate
-
- The Key Vault keys SDK here is **@azure/keyvault-keys**, if you are using the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
-
- * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-keys/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault key tasks:
-
-     * Create a new elliptic curve key in Azure Key Vault
-     * Create a new RSA key in Azure Key Vault
-     * Get a specified key
-     * List the keys
-     * Update the key
-     * Delete the key
-
- The Key Vault keys SDK here is **@azure/keyvault-secrets**, if you are using the [latest](https://www.npmjs.com/package/@azure/keyvault-secrets) version of the key vault SDK package, please refer to the following examples:
-
- * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-secrets/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault secret tasks:
-
-     * Create a new secret
-     * Get the secret
-     * Update the secret with different attributes
-     * Delete the secret
 
 ## Resources
 

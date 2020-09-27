@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for
  * license information.
+ * 
+ * This file uses an outdated library.  Please see the readme to find the latest version.
  */
 'use strict';
 
@@ -11,6 +13,7 @@ const ComputeManagementClient = require('azure-arm-compute');
 const NetworkManagementClient = require('azure-arm-network');
 const ResourceManagementClient = require('azure-arm-resource').ResourceManagementClient;
 const KeyVaultManagementClient = require('azure-arm-keyvault');
+// #Deprecated Libraries
 const KeyVault = require('azure-keyvault');
 const GraphRBACClient = require('azure-graph');
 const setTimeoutPromise = util.promisify(setTimeout);
@@ -64,6 +67,7 @@ msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function (
   computeClient = new ComputeManagementClient(credentials, subscriptionId);
   networkClient = new NetworkManagementClient(credentials, subscriptionId);
   keyVaultManagementClient = new KeyVaultManagementClient(credentials, subscriptionId);
+  // #Deprecated Libraries
   keyVaultClient = new KeyVault.KeyVaultClient(credentials);
   graphClient = new GraphRBACClient(credentials, domain);
 
@@ -159,17 +163,20 @@ function startSample() {
         }
       ]
     };
+    // #Deprecated Libraries
     return keyVaultClient.createCertificate(vaultObj.properties.vaultUri, certificateName, { certificatePolicy: certificatePolicy });
   }).then((certificate) => {
     // Poll until certificate operation finishes
     function pollStatus() {
       console.log("Wait until certificate creation is finished");
+      // #Deprecated Libraries
       return setTimeoutPromise(5000, keyVaultClient.getCertificateOperation(vaultObj.properties.vaultUri, certificateName)).then((result) => {
         if (result.status === "completed") {
           print_item(result);
 
           // Get certificate secret
           console.log('\n4.Get keyvault certificate as secret');
+          // #Deprecated Libraries
           return keyVaultClient.getSecret(vaultObj.properties.vaultUri, certificateName, '')
         }
         else {
