@@ -67,7 +67,7 @@ msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function (
   computeClient = new ComputeManagementClient(credentials, subscriptionId);
   networkClient = new NetworkManagementClient(credentials, subscriptionId);
   keyVaultManagementClient = new KeyVaultManagementClient(credentials, subscriptionId);
-  // #Deprecated Libraries
+  // Deprecated Libraries
   keyVaultClient = new KeyVault.KeyVaultClient(credentials);
   graphClient = new GraphRBACClient(credentials, domain);
 
@@ -163,20 +163,20 @@ function startSample() {
         }
       ]
     };
-    // #Deprecated Libraries
+    // Deprecated Libraries
     return keyVaultClient.createCertificate(vaultObj.properties.vaultUri, certificateName, { certificatePolicy: certificatePolicy });
   }).then((certificate) => {
     // Poll until certificate operation finishes
     function pollStatus() {
       console.log("Wait until certificate creation is finished");
-      // #Deprecated Libraries
+      // Deprecated Libraries
       return setTimeoutPromise(5000, keyVaultClient.getCertificateOperation(vaultObj.properties.vaultUri, certificateName)).then((result) => {
         if (result.status === "completed") {
           print_item(result);
 
           // Get certificate secret
           console.log('\n4.Get keyvault certificate as secret');
-          // #Deprecated Libraries
+          // Deprecated Libraries
           return keyVaultClient.getSecret(vaultObj.properties.vaultUri, certificateName, '')
         }
         else {
