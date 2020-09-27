@@ -18,7 +18,7 @@ from a Key Vault account.
 - Create resource group
 - Create a key vault by the Key Vault Management Client
 - Create the certificate
-- Gets the creation operation associated with a specified certificate
+- Get the creation operation associated with a specified certificate
 - Get certificate as secret
 - Delete resource group
 
@@ -37,8 +37,8 @@ The Key Vault certificates SDK in this repo is **@azure/keyvault-certificates**.
  * [operations.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/operations.ts) - Examples for Key Vault certificate's operation tasks:
 
      * Create a new certificate
-     * Gets the creation operation associated with a specified certificate
-     * Deletes the creation operation for a specified certificate that is in the process of being created
+     * Get the creation operation associated with a specified certificate
+     * Delete the creation operation for a specified certificate that is in the process of being created
      * Get the certificate
 
  The Key Vault keys SDK in this repo is **@azure/keyvault-keys**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
