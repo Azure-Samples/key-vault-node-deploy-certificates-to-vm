@@ -13,7 +13,7 @@ const ComputeManagementClient = require('azure-arm-compute');
 const NetworkManagementClient = require('azure-arm-network');
 const ResourceManagementClient = require('azure-arm-resource').ResourceManagementClient;
 const KeyVaultManagementClient = require('azure-arm-keyvault');
-// #Deprecated Libraries
+// Deprecated Libraries
 const KeyVault = require('azure-keyvault');
 const GraphRBACClient = require('azure-graph');
 const setTimeoutPromise = util.promisify(setTimeout);
