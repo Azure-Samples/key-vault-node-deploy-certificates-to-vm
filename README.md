@@ -24,7 +24,7 @@ from a Key Vault account.
 
 ## Use latest Key Vault SDK
 
-The Key Vault certificates SDK in this repo is **@azure/keyvault-certificates**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-certificates) version of the key vault SDK package, please refer to the following examples:
+The Key Vault certificates SDK in this repo is **\@azure/keyvault-certificates**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-certificates) version of the key vault SDK package, please refer to the following examples:
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-certificates/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault certificate tasks:
 
@@ -41,7 +41,7 @@ The Key Vault certificates SDK in this repo is **@azure/keyvault-certificates**.
      * Delete the creation operation for a specified certificate that is in the process of being created
      * Get the certificate
 
- The Key Vault keys SDK in this repo is **@azure/keyvault-keys**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
+ The Key Vault keys SDK in this repo is **\@azure/keyvault-keys**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-keys) version of the key vault SDK package, please refer to the following examples:
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-keys/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault key tasks:
 
@@ -52,7 +52,7 @@ The Key Vault certificates SDK in this repo is **@azure/keyvault-certificates**.
      * Update the key
      * Delete the key
 
- The Key Vault keys SDK in this repo is **@azure/keyvault-secrets**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-secrets) version of the key vault SDK package, please refer to the following examples:
+ The Key Vault keys SDK in this repo is **\@azure/keyvault-secrets**. It's strongly recommended that you use the [latest](https://www.npmjs.com/package/@azure/keyvault-secrets) version of the key vault SDK package, please refer to the following examples:
 
  * [helloworld.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/keyvault/keyvault-secrets/samples/typescript/src/helloWorld.ts) - Examples for common Key Vault secret tasks:
 
