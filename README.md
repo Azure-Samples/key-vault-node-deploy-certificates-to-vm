@@ -173,7 +173,11 @@ You can also found different example on how to create a Key Vault account:
 ### Ask Key Vault to create a certificate for you
 
 ```javascript
-    await certificateClient.beginCreateCertificate(certificateName, certificatePolicy);
+      const createPoller = await certificateClient.beginCreateCertificate(
+        certificateName,
+        certificatePolicy
+      );
+      await createPoller.pollUntilDone();
 ```
 
 A default `certificatePolicy` is described in the sample file:

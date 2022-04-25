@@ -8,7 +8,7 @@
 ("use strict");
 
 const util = require("util");
-const { DefaultAzureCredential } = require("@azure/identity");
+const { ClientSecretCredential } = require("@azure/identity");
 const { ComputeManagementClient } = require("@azure/arm-compute");
 const { NetworkManagementClient } = require("@azure/arm-network");
 const { ResourceManagementClient } = require("@azure/arm-resources");
@@ -30,7 +30,6 @@ let resourceClient,
   keyVaultManagementClient,
   certificateClient,
   graphClient;
-// let computeClient = new ComputeManagementClient(credentials, subscriptionId);
 
 //Sample Config
 let randomIds = {};
@@ -68,7 +67,7 @@ let adminPassword = "Pa$$w0rd92";
 ///////////////////////////////////////////
 
 async function main() {
-  const credentials = new DefaultAzureCredential();
+  const credentials = new ClientSecretCredential(domain, clientId, secret);
   resourceClient = new ResourceManagementClient(credentials, subscriptionId);
   computeClient = new ComputeManagementClient(credentials, subscriptionId);
   networkClient = new NetworkManagementClient(credentials, subscriptionId);
@@ -187,10 +186,11 @@ async function startSample() {
         ],
       };
       // Deprecated Libraries
-      return await certificateClient.beginCreateCertificate(
+      const createPoller = await certificateClient.beginCreateCertificate(
         certificateName,
         certificatePolicy
       );
+      return await createPoller.pollUntilDone();
     })
     .then((certificate) => {
       // Poll until certificate operation finishes
@@ -288,11 +288,12 @@ async function createVnet() {
     subnets: [{ name: subnetName, addressPrefix: "10.0.0.0/24" }],
   };
   console.log(`\n5.Creating vnet: ${vnetName} with subnet: ${subnetName}`);
-  return await networkClient.virtualNetworks.beginCreateOrUpdateAndWait(
+  await networkClient.virtualNetworks.beginCreateOrUpdateAndWait(
     resourceGroupName,
     vnetName,
     vnetParameters
   );
+  return await networkClient.virtualNetworks.get(resourceGroupName, vnetName);
 }
 
 async function createPublicIP() {
