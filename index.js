@@ -8,7 +8,7 @@
 ("use strict");
 
 const util = require("util");
-const { ClientSecretCredential } = require("@azure/identity");
+const { DefaultAzureCredential } = require("@azure/identity");
 const { ComputeManagementClient } = require("@azure/arm-compute");
 const { NetworkManagementClient } = require("@azure/arm-network");
 const { ResourceManagementClient } = require("@azure/arm-resources");
@@ -67,7 +67,7 @@ let adminPassword = "Pa$$w0rd92";
 ///////////////////////////////////////////
 
 async function main() {
-  const credentials = new ClientSecretCredential(domain, clientId, secret);
+  const credentials = new DefaultAzureCredential();
   resourceClient = new ResourceManagementClient(credentials, subscriptionId);
   computeClient = new ComputeManagementClient(credentials, subscriptionId);
   networkClient = new NetworkManagementClient(credentials, subscriptionId);
