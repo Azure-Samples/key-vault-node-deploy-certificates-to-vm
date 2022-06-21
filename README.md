@@ -138,6 +138,7 @@ For details about creation of these components, you can refer to the generic sam
       tenantId: domain,
       properties: {
         sku: {
+          family: "A",
           name: 'standard',
         },
         accessPolicies: [
@@ -151,11 +152,12 @@ For details about creation of these components, you can refer to the generic sam
           }
         ],
         # Critical to allow the VM to download certificates later
-        enabledForDeployment: true
+        enabledForDeployment: true,
+        tenantId: domain
       },
       tags: {}
     };
-    return keyVaultManagementClient.vaults.createOrUpdate(resourceGroupName, keyVaultName, keyVaultParameters);
+    return await keyVaultManagementClient.vaults.beginCreateOrUpdateAndWait(resourceGroupName, keyVaultName, keyVaultParameters);
 ```
 
 You can also found different example on how to create a Key Vault account:
@@ -171,43 +173,39 @@ You can also found different example on how to create a Key Vault account:
 ### Ask Key Vault to create a certificate for you
 
 ```javascript
-    keyVaultClient.createCertificate(vaultObj.properties.vaultUri, certificateName, { certificatePolicy: certificatePolicy });
+      const createPoller = await certificateClient.beginCreateCertificate(
+        certificateName,
+        certificatePolicy
+      );
+      await createPoller.pollUntilDone();
 ```
 
 A default `certificatePolicy` is described in the sample file:
 ```javascript
-    let certificatePolicy = {
-      keyProperties: {
+      let certificatePolicy = {
         exportable: true,
-        keyType: 'RSA',
+        keyType: "RSA",
         keySize: 2048,
-        reuseKey: true
-      },
-      secretProperties: {
-        contentType: 'application/x-pkcs12'
-      },
-      issuerParameters: {
-        name: 'Self'
-      },
-      x509CertificateProperties: {
-        subject: 'CN=CLIGetDefaultPolicy',
-        validity_in_months: 12,
-        key_usage: [
+        reuseKey: true,
+        contentType: "application/x-pkcs12",
+        issuerName: "Self",
+        subject: "CN=CLIGetDefaultPolicy",
+        validityInMonths: 12,
+        keyUsage: [
           "cRLSign",
           "dataEncipherment",
           "digitalSignature",
           "keyEncipherment",
           "keyAgreement",
-          "keyCertSign"
-        ]
-      },
-      lifetimeActions: [
-        {
-          action: { actionType: "AutoRenew" },
-          trigger: { daysBeforeExpiry: 90 }
-        }
-      ]
-    };
+          "keyCertSign",
+        ],
+        lifetimeActions: [
+          {
+            action: "AutoRenew",
+            lifetimePercentage: 90,
+          },
+        ],
+      };
 ```
 
 This is the same policy that:
@@ -222,7 +220,7 @@ This is the same policy that:
 First, get your certificate as a Secret object:
 
 ```javascript
-    keyVaultClient.getSecret(vaultObj.properties.vaultUri, certificateName, '')
+    await certificateClient.getCertificate(certificateName)
 ```
 
 During the creation of the VM, use the `secrets` atribute to assign your certificate:.
@@ -240,12 +238,12 @@ During the creation of the VM, use the `secrets` atribute to assign your certifi
             id: vaultObj.id,
         },
         vaultCertificates: [{
-            certificateUrl: certificateSecretObj.id
+            certificateUrl: certificateSecretObj.secretId
         }]
     }]
     },
     hardwareProfile: {
-      vmSize: 'Basic_A0'
+      vmSize: 'Standard_D2s_v3'
     },
     storageProfile: {
       imageReference: {
@@ -265,7 +263,7 @@ During the creation of the VM, use the `secrets` atribute to assign your certifi
     }
   };
 
-  return computeClient.virtualMachines.createOrUpdate(resourceGroupName, vmName, vmParameters);
+  return await computeClient.virtualMachines.beginCreateOrUpdateAndWait(resourceGroupName, vmName, vmParameters);
 ```
 > [AZURE.NOTE] By default, this sample deletes the resources created in the sample. To retain them, comment out the line: `return resourceClient.resourceGroups.deleteMethod(resourceGroupName);`
 
